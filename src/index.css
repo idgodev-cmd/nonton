@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 281230dd36066321a5ff845e80e39d312194aea4
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -252,35 +248,3 @@
     }
   }
 }
-<<<<<<< HEAD
-=======
-=======
-@import "tailwindcss";
-
-@theme {
-  --font-sans: 'Inter', system-ui, sans-serif;
-  --color-primary: #e50914;
-  --color-dark: #0E0E10;
-}
-
-/* Custom Utilities */
-@utility no-scrollbar {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-
-  /* Firefox */
-  &::-webkit-scrollbar {
-    display: none;
-  }
-}
-
-/* Base resets if needed, though Tailwind handles most */
-body {
-  background-color: var(--color-dark);
-  color: white;
-  font-family: var(--font-sans);
-  overflow-x: hidden;
-}
->>>>>>> 877c61ce545f95ce9f64a3f0ab50d369b6897075
->>>>>>> 281230dd36066321a5ff845e80e39d312194aea4

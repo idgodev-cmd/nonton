@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 281230dd36066321a5ff845e80e39d312194aea4
 # dependencies
 /node_modules
 /.pnp
@@ -44,32 +40,3 @@ DEPLOY_VPS.md
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-<<<<<<< HEAD
-=======
-=======
-# Logs
-logs
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
-lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
->>>>>>> 877c61ce545f95ce9f64a3f0ab50d369b6897075
->>>>>>> 281230dd36066321a5ff845e80e39d312194aea4
