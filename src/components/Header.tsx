@@ -12,6 +12,7 @@ import { useShortMaxSearch } from "@/hooks/useShortMax";
 import { useMeloloSearch } from "@/hooks/useMelolo";
 import { useFlickReelsSearch } from "@/hooks/useFlickReels";
 import { useFreeReelsSearch } from "@/hooks/useFreeReels";
+import { useKomikSearch } from "@/hooks/useKomik";
 import { usePlatform } from "@/hooks/usePlatform";
 import { useDebounce } from "@/hooks/useDebounce";
 import { usePathname } from "next/navigation";
@@ -24,7 +25,7 @@ export function Header() {
   const normalizedQuery = debouncedQuery.trim();
 
   // Platform context
-  const { isDramaBox, isReelShort, isShortMax, isNetShort, isMelolo, isFlickReels, isFreeReels, platformInfo } = usePlatform();
+  const { isDramaBox, isReelShort, isShortMax, isNetShort, isMelolo, isFlickReels, isFreeReels, isKomik, platformInfo } = usePlatform();
 
   // Search based on platform
   const { data: dramaBoxResults, isLoading: isSearchingDramaBox } = useSearchDramas(
@@ -48,6 +49,9 @@ export function Header() {
   const { data: freeReelsResults, isLoading: isSearchingFreeReels } = useFreeReelsSearch(
     isFreeReels ? normalizedQuery : ""
   );
+  const { data: komikResults, isLoading: isSearchingKomik } = useKomikSearch(
+    isKomik ? normalizedQuery : ""
+  );
 
   const isSearching = isDramaBox 
     ? isSearchingDramaBox 
@@ -61,7 +65,9 @@ export function Header() {
             ? isSearchingMelolo
             : isFlickReels
               ? isSearchingFlickReels
-              : isSearchingFreeReels;
+              : isFreeReels
+                ? isSearchingFreeReels
+                : isSearchingKomik;
 
   // Search results processing
   const searchResults = isDramaBox 
@@ -77,7 +83,9 @@ export function Header() {
                 .filter((book: any) => book.thumb_url && book.thumb_url !== "") || []
             : isFlickReels
               ? flickReelsResults?.data
-              : freeReelsResults;
+              : isFreeReels
+                ? freeReelsResults
+                : komikResults?.data;
 
   const handleSearchClose = () => {
     setSearchOpen(false);
@@ -450,6 +458,56 @@ export function Header() {
                               ))}
                             </div>
                           )}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                )}
+                
+                {/* Komik Results */}
+                {isKomik && searchResults && searchResults.length > 0 && (
+                  <div className="grid gap-3">
+                    {searchResults.map((comic: any, index: number) => (
+                      <Link
+                        key={comic.id}
+                        href={`/detail/komik/${comic.id}`}
+                        onClick={handleSearchClose}
+                        className="flex gap-4 p-4 rounded-2xl bg-card hover:bg-muted transition-all text-left animate-fade-up overflow-hidden"
+                        style={{ animationDelay: `${index * 50}ms` }}
+                      >
+                        <div className="w-16 h-24 bg-muted rounded-xl flex-shrink-0 overflow-hidden">
+                          <img
+                            src={comic.cover && comic.cover.startsWith('http') 
+                                ? `/api/komik/getimage?url=${encodeURIComponent(comic.cover)}` 
+                                : comic.cover}
+                            alt={comic.title}
+                            className="w-full h-full object-cover"
+                            loading="lazy"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h3 className="font-display font-semibold text-foreground truncate">{comic.title}</h3>
+                          {comic.author && (
+                            <p className="text-sm text-muted-foreground mt-1 truncate">By {comic.author}</p>
+                          )}
+                          {comic.description && (
+                            <p className="text-sm text-muted-foreground line-clamp-2 mt-2">
+                              {comic.description}
+                            </p>
+                          )}
+                          <div className="flex flex-wrap gap-1.5 mt-2">
+                            {comic.status && (
+                              <span className="tag-pill text-[10px] bg-primary/20 text-primary uppercase">
+                                {comic.status}
+                              </span>
+                            )}
+                            {comic.genres && comic.genres.slice(0, 2).map((genre: string, idx: number) => (
+                              <span key={idx} className="tag-pill text-[10px]">
+                                {genre}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </Link>
                     ))}

@@ -2,7 +2,7 @@
 
 import { create } from "zustand";
 
-export type Platform = "dramabox" | "reelshort" | "shortmax" | "netshort" | "melolo" | "flickreels" | "freereels";
+export type Platform = "dramabox" | "reelshort" | "shortmax" | "netshort" | "melolo" | "flickreels" | "freereels" | "komik";
 
 export interface PlatformInfo {
   id: Platform;
@@ -54,6 +54,12 @@ export const PLATFORMS: PlatformInfo[] = [
     logo: "/freereels.webp",
     apiBase: "/api/freereels",
   },
+  {
+    id: "komik",
+    name: "Komik",
+    logo: "/komik.png",
+    apiBase: "/api/komik",
+  },
 ];
 
 interface PlatformState {
@@ -87,5 +93,6 @@ export function usePlatform() {
     isMelolo: currentPlatform === "melolo",
     isFlickReels: currentPlatform === "flickreels",
     isFreeReels: currentPlatform === "freereels",
+    isKomik: currentPlatform === "komik",
   };
 }

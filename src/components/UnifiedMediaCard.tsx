@@ -15,6 +15,7 @@ export interface UnifiedMediaCardProps {
   cover: string;
   link: string;
   episodes?: number;
+  subtitle?: string;
   topLeftBadge?: BadgeConfig | null;
   topRightBadge?: BadgeConfig | null;
   index?: number;
@@ -25,6 +26,7 @@ export function UnifiedMediaCard({
   cover,
   link,
   episodes = 0,
+  subtitle,
   topLeftBadge,
   topRightBadge,
   index = 0,
@@ -119,6 +121,11 @@ export function UnifiedMediaCard({
         <h3 className="font-display font-semibold text-xs md:text-sm leading-snug line-clamp-2 text-foreground group-hover:text-primary transition-colors">
           {title}
         </h3>
+        {subtitle && (
+          <p className="text-[10px] md:text-xs text-muted-foreground truncate mt-0.5">
+            {subtitle}
+          </p>
+        )}
       </div>
     </Link>
   );
