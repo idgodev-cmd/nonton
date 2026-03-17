@@ -478,7 +478,7 @@ export function Header() {
                         <div className="w-16 h-24 bg-muted rounded-xl flex-shrink-0 overflow-hidden">
                           <img
                             src={comic.cover && comic.cover.startsWith('http') 
-                                ? `/api/komik/getimage?url=${encodeURIComponent(comic.cover)}` 
+                                ? `https://wsrv.nl/?url=${encodeURIComponent(comic.cover)}&w=200&output=jpg` 
                                 : comic.cover}
                             alt={comic.title}
                             className="w-full h-full object-cover"

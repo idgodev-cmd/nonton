@@ -16,12 +16,11 @@ export async function GET(request: NextRequest) {
       );
     }
 
-    const response = await fetch(`${UPSTREAM_API}/getimage?url=${encodeURIComponent(url)}`, {
-      cache: 'no-store',
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-        "Referer": "https://api.sansekai.my.id/",
-      }
+    // Use wsrv.nl to fetch and process the image, bypassing our upstream quota for images
+    const imageUrl = `https://wsrv.nl/?url=${encodeURIComponent(url)}&output=jpg`;
+    
+    const response = await fetch(imageUrl, {
+      next: { revalidate: 31536000 }, // Cache long-term
     });
 
     if (!response.ok) {

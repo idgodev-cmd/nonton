@@ -77,7 +77,7 @@ export function KomikHome() {
                 index={index}
                 title={comic.title}
                 cover={comic.cover && comic.cover.startsWith('http') 
-                    ? `/api/komik/getimage?url=${encodeURIComponent(comic.cover)}` 
+                    ? `https://wsrv.nl/?url=${encodeURIComponent(comic.cover)}&w=300&output=jpg` 
                     : comic.cover}
                 link={`/detail/komik/${comic.id}`}
                 subtitle={comic.author}
@@ -106,7 +106,7 @@ export function KomikHome() {
                 index={index}
                 title={comic.title}
                 cover={comic.cover && comic.cover.startsWith('http') 
-                    ? `/api/komik/getimage?url=${encodeURIComponent(comic.cover)}` 
+                    ? `https://wsrv.nl/?url=${encodeURIComponent(comic.cover)}&w=300&output=jpg` 
                     : comic.cover}
                 link={`/detail/komik/${comic.id}`}
                 subtitle={comic.author}
@@ -135,7 +135,7 @@ export function KomikHome() {
                 index={index}
                 title={comic.title}
                 cover={comic.cover && comic.cover.startsWith('http') 
-                    ? `/api/komik/getimage?url=${encodeURIComponent(comic.cover)}` 
+                    ? `https://wsrv.nl/?url=${encodeURIComponent(comic.cover)}&w=300&output=jpg` 
                     : comic.cover}
                 link={`/detail/komik/${comic.id}`}
                 subtitle={comic.lastChapter}
